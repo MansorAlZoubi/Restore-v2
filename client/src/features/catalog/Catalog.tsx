@@ -1,14 +1,17 @@
 
 import ProductList from "./ProductList";
 import type { Product } from "../../app/models/product";
-type Props=
-{
-products:Product[];
+import { useEffect, useState } from "react";
 
 
-};
+export default function Catalog() {
+   const [products,setProducts]= useState<Product[]>([]);
 
-export default function Catalog({products}:Props) {
+   useEffect(() =>
+   {
+   fetch('https://localhost:5001/api/Product')
+   .then(Response => Response.json()
+   .then(data => setProducts(data)));},[]);
   return (
     <>
  
@@ -18,3 +21,10 @@ export default function Catalog({products}:Props) {
     </>
   )
 }
+// {products}:Props
+// type Props=
+// {
+// products:Product[];
+
+
+// };
