@@ -1,23 +1,16 @@
-import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom"
-import type { Product } from "../../app/models/product";
 import { Button, Divider, Grid2, Table, TableBody, TableCell, TableContainer, TableRow, TextField, Typography } from "@mui/material";
+import { useFetchProductDetailsQuery } from "./catalogApi";
 
 
 
 export default function ProductDetails() {
   const {id}=useParams();
-  const [product,setproduct]=useState<Product | null>(null);
 
+const {data:product,isLoading}=useFetchProductDetailsQuery(id?+id:0)
+if(!product||isLoading) return <div>...Loding</div>
  
-  useEffect(()=>{
-  fetch(`https://localhost:5001/api/product/${id}`)
-  .then(response=>response.json())
-  .then(data=>setproduct(data))
-  .catch(error=>console.log(error))
-  },[]);
-
-  if(!product) return <div>Loding</div>
 
  const ProductDetails=[
   {label:'name' ,value:product.name},
@@ -83,3 +76,10 @@ ADD TO Basket
     </Grid2>
   )
 }
+  // useEffect(()=>{
+  // fetch(`https://localhost:5001/api/product/${id}`)
+  // .then(response=>response.json())
+  // .then(data=>setproduct(data))
+  // .catch(error=>console.log(error))
+  // },[id]);
+    // const [product,setproduct]=useState<Product | null>(null);

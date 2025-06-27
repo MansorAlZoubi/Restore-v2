@@ -6,7 +6,6 @@ type Props =
 {
 products: Product[];
 
-
 };
 export default function ProductList({products}:Props) {
   return (
