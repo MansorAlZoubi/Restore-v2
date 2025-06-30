@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace API.Controllers;
-
 public class BuggyController : BaseApiController
 {
     [HttpGet("not-found")]
